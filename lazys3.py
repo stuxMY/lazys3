@@ -8,6 +8,7 @@ import subprocess
 import boto3
 import time
 import random
+
 print("""
 🟥⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🟥🟥⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
@@ -17,7 +18,7 @@ print("""
 🟥🟥🟥🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜
 🟥🟥🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
 🟥🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
-🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 ® Free Palestine
+🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 ® Free Palestine ® coded by mirul
       
 ░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░▒▓███████▓▒░  
 ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░ 
@@ -28,6 +29,7 @@ print("""
 ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░  ░▒▓█▓▒░   ░▒▓███████▓▒░░▒▓███████▓▒░  
                                                                                 
     """)
+
 def load_aws_credentials():
     """
     Load AWS credentials from the default AWS credentials file (~/.aws/credentials).
@@ -92,6 +94,14 @@ def download_directory(s3, bucket_name, directory_prefix, local_directory):
     Download all objects within a directory from a specified S3 bucket.
     """
     objects = list_objects_in_bucket(s3, bucket_name, directory_prefix)
+    for obj_key, _ in objects:
+        download_object(s3, bucket_name, obj_key, local_directory)
+
+def download_all_objects(s3, bucket_name, local_directory):
+    """
+    Download all objects within a bucket to the specified local directory.
+    """
+    objects = list_objects_in_bucket(s3, bucket_name)
     for obj_key, _ in objects:
         download_object(s3, bucket_name, obj_key, local_directory)
 
@@ -176,7 +186,8 @@ def main():
         print("3. Navigate Directories in a Bucket")
         print("4. Download Object")
         print("5. Download Directory")
-        print("6. Exit")
+        print("6. Download All Objects in a Bucket")  # Added option
+        print("7. Exit")
 
         elapsed_time = time.time() - start_time
         if elapsed_time > color_timer:
@@ -211,6 +222,11 @@ def main():
             download_directory(s3, bucket_name, directory_prefix, local_directory)
             print(f"Directory '{directory_prefix}' downloaded to '{local_directory}'")
         elif choice == '6':
+            bucket_name = input("Enter bucket name: ")
+            local_directory = input("Enter local directory to save: ")
+            download_all_objects(s3, bucket_name, local_directory)
+            print(f"All objects in bucket '{bucket_name}' downloaded to '{local_directory}'")
+        elif choice == '7':
             print("Exiting...")
             break
         else:
@@ -218,3 +234,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -5,7 +5,9 @@
     <h3>LAZYS3</h3>
 </div>
 
-![Hacky Badge](https://img.shields.io/badge/for-the-badge?style=for-the-badge&logo=hackaday&logoColor=white)
+![Python Version](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
+![Script Version](https://img.shields.io/badge/Version-v1.2.0-orange)
+
 
 # LAZYS3 
 

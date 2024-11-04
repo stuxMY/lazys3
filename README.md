@@ -1,3 +1,5 @@
+![Description of the image](https://ibb.co/Hx3nfcm))
+
 # LAZYS3 
 
 A Python script to interact with AWS S3 buckets, allowing users to list buckets, navigate directories, and download objects and directories.

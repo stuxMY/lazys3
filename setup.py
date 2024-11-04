@@ -3,15 +3,13 @@ from setuptools import setup, find_packages
 setup(
     name='lazys3',
     version='1.2.1',
-    description='LAZYS3 is a powerful command-line tool designed for seamless interaction with Amazon S3 (Simple Storage Service). ',
+    description='LAZYS3 is a powerful command-line tool designed for seamless interaction with Amazon S3 (Simple Storage Service)',
     author='stuxMY',
-    author_email='',
     packages=find_packages(),
     install_requires=[
         boto3
         colorama
         tabulate
-
     ],
     classifiers=[
         'Programming Language :: Python :: 3',

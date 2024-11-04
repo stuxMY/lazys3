@@ -1,4 +1,4 @@
-![Description of the image](https://ibb.co/Hx3nfcm)
+![LAZYS3 IMAGES](https://ibb.co/Hx3nfcm)
 
 # LAZYS3 
 

@@ -1,4 +1,7 @@
 from setuptools import setup, find_packages
+import colorama
+import boto3
+import tabulate
 
 setup(
     name='lazys3',

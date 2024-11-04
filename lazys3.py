@@ -2,48 +2,22 @@
 import os
 import configparser
 from tabulate import tabulate
-from colorama import init, Fore, Style
+from colorama import init, Fore, Back, Style
 import subprocess
-import threading
+
 import boto3
 import time
 import random
 
-# Initialize Colorama
-init(autoreset=True)
+print("""
+██╗      █████╗ ███████╗██╗   ██╗    ███████╗██████╗ 
+██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝    ██╔════╝╚════██╗
+██║     ███████║  ███╔╝  ╚████╔╝     ███████╗ █████╔╝
+██║     ██╔══██║ ███╔╝    ╚██╔╝      ╚════██║ ╚═══██╗
+███████╗██║  ██║███████╗   ██║       ███████║██████╔╝
+╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝       ╚══════╝╚═════╝ ®2024🇲🇾
+""")
 
-class Color:
-    PURPLE = '\033[95m'
-    CYAN = '\033[96m'
-    DARKCYAN = '\033[36m'
-    BLUE = '\033[94m'
-    GREEN = '\033[1;32m'
-    YELLOW = '\033[93m'
-    RED = '\033[1;31m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    BLINK = '\033[5m'
-    END = '\033[0m'
-
-colors = [Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE]
-message = f"""
-{Color.BLINK}           
-░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░▒▓███████▓▒░  
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓██▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓████████▓▒░  ░▒▓██▓▒░   ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓██▓▒░       ░▒▓█▓▒░          ░▒▓█▓▒░      ░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░          ░▒▓█▓▒░      ░▒▓█▓▒░ 
-░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░  ░▒▓█▓▒░   ░▒▓███████▓▒░░▒▓███████▓▒░  
-                                                                                
-®2024🇲🇾"""
-
-def display_banner():
-    while True:
-        for color in colors:
-            print(color + message + Color.END, end='\r')
-            time.sleep(1)
-            print(' ' * 80, end='\r')
 def load_aws_credentials():
     config = configparser.ConfigParser()
     config.read(os.path.expanduser("~/.aws/credentials"))
@@ -51,6 +25,7 @@ def load_aws_credentials():
     return profiles
 
 def login_to_s3(profile):
+
     session = boto3.Session(profile_name=profile)
     s3 = session.client('s3')
     return s3
@@ -95,6 +70,10 @@ def download_all_objects(s3, bucket_name, local_directory):
     for obj_key, _ in objects:
         download_object(s3, bucket_name, obj_key, local_directory)
 
+def change_color():
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN]
+    return random.choice(colors)
+
 def prompt_keep_or_delete(image_path):
     while True:
         choice = input("Do you want to keep the downloaded image? (y/n): ").strip().lower()
@@ -138,10 +117,6 @@ def navigate_directories(s3, bucket_name, base_directory=""):
             print("Invalid choice. Please try again.")
 
 def main():
-    banner_thread = threading.Thread(target=display_banner)
-    banner_thread.daemon = True
-    banner_thread.start()
-
     profiles = load_aws_credentials()
     
     if not profiles:
@@ -157,6 +132,9 @@ def main():
     
     s3 = login_to_s3(selected_profile)
 
+    color_timer = 5
+    start_time = time.time()
+
     while True:
         print("\nOptions:")
         print("1. List Buckets")
@@ -164,10 +142,17 @@ def main():
         print("3. Navigate Directories in a Bucket")
         print("4. Download Object")
         print("5. Download Directory")
-        print("6. Download All Objects in a Bucket")
+        print("6. Download All Objects in a Bucket")  # Added option
         print("7. Exit")
 
-        choice = input("Enter your choice: ")
+        elapsed_time = time.time() - start_time
+        if elapsed_time > color_timer:
+            start_time = time.time()
+            color = change_color()
+        else:
+            color = Fore.RESET
+
+        choice = input(f"{color}Enter your choice: ")
 
         if choice == '1':
             buckets = list_buckets(s3)
@@ -178,26 +163,31 @@ def main():
             print(tabulate(enumerate(objects, start=1), headers=["#", "Object Key", "Size"], tablefmt="fancy_grid"))
         elif choice == '3':
             bucket_name = input("Enter bucket name: ")
-            navigate_directories(s3, bucket_name)
+            base_directory = input("Enter base directory (optional): ")
+            navigate_directories(s3, bucket_name, base_directory)
         elif choice == '4':
             bucket_name = input("Enter bucket name: ")
-            object_key = input("Enter the object key to download: ")
-            local_directory = input("Enter the local directory to save the file: ")
-            download_object(s3, bucket_name, object_key, local_directory)
+            object_key = input("Enter object key: ")
+            local_directory = input("Enter local directory to save: ")
+            local_filename = download_object(s3, bucket_name, object_key, local_directory)
+            print(f"Object '{object_key}' downloaded as '{local_filename}'")
         elif choice == '5':
             bucket_name = input("Enter bucket name: ")
-            directory_prefix = input("Enter the directory prefix to download: ")
-            local_directory = input("Enter the local directory to save the files: ")
+            directory_prefix = input("Enter directory prefix: ")
+            local_directory = input("Enter local directory to save: ")
             download_directory(s3, bucket_name, directory_prefix, local_directory)
+            print(f"Directory '{directory_prefix}' downloaded to '{local_directory}'")
         elif choice == '6':
             bucket_name = input("Enter bucket name: ")
-            local_directory = input("Enter the local directory to save the files: ")
+            local_directory = input("Enter local directory to save: ")
             download_all_objects(s3, bucket_name, local_directory)
+            print(f"All objects in bucket '{bucket_name}' downloaded to '{local_directory}'")
         elif choice == '7':
-            print("Exiting the program.")
+            print("Exiting...")
             break
         else:
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main()
+

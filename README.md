@@ -1,4 +1,7 @@
-![LAZYS3 IMAGES](https://ibb.co/Hx3nfcm)
+<a href="https://github.com/astrdev/gitpy">
+    <img src="https://i.ibb.co/wwjMFnD/Gemini-Generated-Image-fm13nrfm13nrfm13.jpg" alt="Logo" width="300" height="330">
+</a>
+<h3 align="center">LAZYS3</h3>
 
 # LAZYS3 
 

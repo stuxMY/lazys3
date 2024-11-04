@@ -31,10 +31,10 @@ A Python script to interact with AWS S3 buckets, allowing users to list buckets,
    ```python3
    git clone https://github.com/stuxMY/lazys3.git
    cd lazys3
-   pip install boto3 tabulate colorama
+   pip install -r requirements.txt
    chmod +x lazys3.py
    ./lazys3.py
-
+   
 
 
 ## Usage

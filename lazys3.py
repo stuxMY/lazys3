@@ -76,7 +76,7 @@ def change_color():
 
 def prompt_keep_or_delete(image_path):
     while True:
-        choice = input("Do you want to keep the downloaded image? (y/n): ").strip().lower()
+        choice = input("Keep the downloaded image? (y/n): ").strip().lower()
         if choice == 'y':
             print("Image kept.")
             break
@@ -120,7 +120,7 @@ def main():
     profiles = load_aws_credentials()
     
     if not profiles:
-        print("No profiles found in the AWS credentials file.")
+        print("No profiles found in AWS credentials file.")
         return
 
     print("Available AWS Profiles:")

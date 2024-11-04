@@ -7,8 +7,8 @@ setup(
     author='stuxMY',
     packages=find_packages(),
     install_requires=[
-        boto3
-        colorama
+        boto3,
+        colorama,
         tabulate
     ],
     classifiers=[

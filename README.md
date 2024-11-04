@@ -23,21 +23,16 @@ A Python script to interact with AWS S3 buckets, allowing users to list buckets,
    ```python3
    git clone https://github.com/stuxMY/lazys3.git
    cd lazys3
-   chmod +x lazys3.py
    pip install boto3 tabulate colorama
+   chmod +x lazys3.py
+   ./lazys3.py
+
 
 
 ## Usage
 
 Ensure your AWS credentials are set up correctly in ~/.aws/credentials. The format should be:
    ```python3
-
 [profile_name]
 aws_access_key_id=YOUR_ACCESS_KEY
 aws_secret_access_key=YOUR_SECRET_KEY
-
-## RUN SCRIPT 
-python3 lazys3.py or ./lazys3.py
-
-
-

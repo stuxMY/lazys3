@@ -2,14 +2,14 @@
     <a href="https://github.com/stuxMY/lazys3">
         <img src="https://i.ibb.co/FwLTX7G/Gemini-Generated-Image-iosg3qiosg3qiosg.jpg" alt="Logo" width="300" height="330">
     </a>
-    <h3>LAZYS3</h3>
+    <h3>LAZY S3</h3>
 </div>
 
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
 ![Script Version](https://img.shields.io/badge/Version-v1.2.0-orange)
 
 
-# LAZYS3 
+# LAZY S3 
 
 A Python script to interact with AWS S3 buckets, allowing users to list buckets, navigate directories, and download objects and directories.
 

@@ -21,7 +21,7 @@ A Python script to interact with AWS S3 buckets, allowing users to list buckets,
 1. Clone this repository:
 
    ```python3
-   git clone [https://github.com/stuxMY/lazys3.git](https://github.com/stuxMY/lazys3).git
+   git clone [https://github.com/stuxMY/lazys3.git]
    cd lazys3
    chmod +x lazys3.py
    pip install boto3 tabulate colorama

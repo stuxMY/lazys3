@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://github.com/astrdev/gitpy">
+    <a href="https://github.com/stuxMY/lazys3">
         <img src="https://i.ibb.co/FwLTX7G/Gemini-Generated-Image-iosg3qiosg3qiosg.jpg" alt="Logo" width="300" height="330">
     </a>
     <h3>LAZYS3</h3>

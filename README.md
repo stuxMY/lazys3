@@ -1,6 +1,6 @@
 <div align="center">
     <a href="https://github.com/astrdev/gitpy">
-        <img src="https://i.ibb.co/42WM8qG/Gemini-Generated-Image-i951igi951igi951.jpg">
+        <img src="https://i.ibb.co/42WM8qG/Gemini-Generated-Image-i951igi951igi951.jpg" alt="Logo" width="300" height="330">
     </a>
     <h3>LAZYS3</h3>
 </div>

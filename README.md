@@ -5,6 +5,7 @@
     <h3>LAZYS3</h3>
 </div>
 
+![Hacky Badge](https://img.shields.io/badge/Status-Hacked-red?style=for-the-badge&logo=hackaday&logoColor=white)
 
 # LAZYS3 
 
